@@ -20,6 +20,13 @@ ai-novel-writer/
 2. Run `bash run_pipeline.sh pdfs/`.
 3. After processing, the FastAPI server will run on `http://localhost:8000`.
 
+### Docker
+To build and run inside a container:
+```bash
+docker build -t novelwriter .
+docker run -it -p 8000:8000 -v /path/to/pdfs:/app/pdfs novelwriter pdfs/
+```
+
 ### Endpoints
 - `POST /draft` `{outline: str}` → streamed chapter text.
 - `POST /facts` → append new fact to story bible.
