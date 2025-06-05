@@ -1,0 +1,8 @@
+pdfminer.six
+transformers
+datasets
+peft
+sentence_transformers
+faiss-cpu
+fastapi
+uvicorn
