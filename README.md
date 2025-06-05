@@ -1,31 +1,33 @@
-"# NovelWriter" 
-# Offline Novel Generation Pipeline
+# NovelWriter
 
-## Objective
+Offline pipeline for generating novel chapters using local language models.
 
-Create an **offline pipeline** that:
+## Layout
+```
+ai-novel-writer/
+├── data_ingest/          # PDF → JSONL
+├── training/             # QLoRA scripts
+├── rag/                  # fact store + retriever
+├── generation/           # writer + validator loop
+├── api/                  # FastAPI server
+├── tests/                # unit + regression tests
+├── run_pipeline.sh       # one-command end-to-end
+└── README.md
+```
 
-- Ingests long-form **PDF novels** by a **single author**.
-- Fine-tunes a **local language model** using the author's writing style and world-building.
-- Auto-generates new **2,000-word chapters** that:
-  - Remain fully consistent with the established **characters**, **timeline**, **power rules**, and overall **world-building**.
+## Quick Start
+1. Place your source PDFs in a folder, e.g. `pdfs/`.
+2. Run `bash run_pipeline.sh pdfs/`.
+3. After processing, the FastAPI server will run on `http://localhost:8000`.
 
-## Key Features
+### Endpoints
+- `POST /draft` `{outline: str}` → streamed chapter text.
+- `POST /facts` → append new fact to story bible.
+- `GET /health` → server status.
 
-- 📄 **PDF Parsing**: Extracts and processes text from long-form PDFs.
-- 🧠 **Model Fine-Tuning**: Customizes a language model on the author's unique style and universe.
-- ✍️ **Chapter Generation**: Produces new chapters with coherent narrative and continuity.
-- 🔒 **Offline Operation**: All processing occurs locally—no external API or cloud dependencies.
+## Hardware Requirements
+- 16 GB system RAM
+- NVIDIA RTX 3050 6 GB (or CPU fallback)
 
-## Use Case
-
-Ideal for:
-
-- Fans looking to expand on a favorite fictional universe.
-- Authors automating first drafts or exploring alternate storylines.
-- Developers building novel-writing assistants or creative AI projects.
-
----
-
-*Note: Ensuring consistency across generated content requires sophisticated prompt engineering, embedding-based memory for past events, or model retraining strategies.*
-
+## License Notice
+This project bundles Meta Llama 3 license files. Derivative weights may not be re-licensed.
