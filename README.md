@@ -18,8 +18,17 @@ ai-novel-writer/
 ## Quick Start
 1. Place your source PDFs in a folder, e.g. `pdfs/`.
 2. Install the Python requirements with `pip install -r requirements.txt`.
-3. Run `bash run_pipeline.sh pdfs/`.
+3. Run `bash run_pipeline.sh pdfs/ [model]`.
+   - The optional `model` argument can be a local path or HF repo. If omitted,
+     the value from `config.yaml` is used.
 4. After processing, the FastAPI server will run on `http://localhost:8000`.
+
+When invoking `qlora_train.py` directly, the same `--model` option is
+available:
+
+```bash
+python training/qlora_train.py data_ingest/dataset.jsonl --out training/novel_adapter --model /path/to/model
+```
 
 ### Endpoints
 - `POST /draft` `{outline: str}` → streamed chapter text.
