@@ -1,12 +1,13 @@
 #!/bin/bash
 
+# Ensure we stop on errors and undefined variables
+set -euo pipefail
+
 PDF_DIR=$1
 if [ -z "$PDF_DIR" ]; then
   echo "Usage: $0 <pdf_dir>"
   exit 1
 fi
-
-set -e
 
 python data_ingest/load_pdfs.py "$PDF_DIR" --out data_ingest/dataset.jsonl
 python training/qlora_train.py data_ingest/dataset.jsonl --out training/novel_adapter
