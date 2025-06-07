@@ -18,8 +18,9 @@ ai-novel-writer/
 ## Quick Start
 1. Place your source PDFs in a folder, e.g. `pdfs/`.
 2. Install the Python requirements with `pip install -r requirements.txt`.
-3. Run `bash run_pipeline.sh pdfs/`.
-4. After processing, the FastAPI server will run on `http://localhost:8000`.
+3. Authenticate with `huggingface-cli login` and accept the Llama\-3 model license.
+4. Run `bash run_pipeline.sh pdfs/` (downloads the Llama\-3 base model using your HuggingFace token).
+5. After processing, the FastAPI server will run on `http://localhost:8000`.
 
 ### Endpoints
 - `POST /draft` `{outline: str}` → streamed chapter text.
