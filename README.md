@@ -31,4 +31,4 @@ ai-novel-writer/
 - NVIDIA RTX 3050 6 GB (or CPU fallback)
 
 ## License Notice
-This project bundles Meta Llama 3 license files. Derivative weights may not be re-licensed.
+This project includes the Meta Llama 3 license as `META_Llama3_LICENSE.txt`. Derivative weights may not be re-licensed.
