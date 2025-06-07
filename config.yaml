@@ -1,0 +1,4 @@
+model: meta-llama/Meta-Llama-3-8B-Instruct
+validator_model: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+facts_path: rag/story_bible.json
