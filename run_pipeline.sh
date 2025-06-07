@@ -4,13 +4,18 @@
 set -euo pipefail
 
 PDF_DIR=$1
+MODEL=${2-}
 if [ -z "$PDF_DIR" ]; then
-  echo "Usage: $0 <pdf_dir>"
+  echo "Usage: $0 <pdf_dir> [model]"
   exit 1
 fi
 
 python data_ingest/load_pdfs.py "$PDF_DIR" --out data_ingest/dataset.jsonl
-python training/qlora_train.py data_ingest/dataset.jsonl --out training/novel_adapter
+if [ -n "$MODEL" ]; then
+  python training/qlora_train.py data_ingest/dataset.jsonl --out training/novel_adapter --model "$MODEL"
+else
+  python training/qlora_train.py data_ingest/dataset.jsonl --out training/novel_adapter
+fi
 python training/merge_and_quantize.py training/novel_adapter --out models
 
 # Initialize story bible if not exists
